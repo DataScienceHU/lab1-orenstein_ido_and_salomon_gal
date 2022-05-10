@@ -1,0 +1,237 @@
+---
+title: "Lab_1"
+author: "Gal Salomon 316613140 & Ido Orenstein 316593870"
+date: "4/19/2022"
+output: html_document
+---
+
+
+# 1
+### A
+```{r message=FALSE, warning=FALSE, include=FALSE}
+covid_data <- read.csv("https://raw.githubusercontent.com/DataScienceHU/r52414_2021_22_lab1-orenstein_ido_and_salomon_gal/main/owid-covid-data_original.csv?token=GHSAT0AAAAAABTWTYLKDMPUR7DU4OTB52CIYT2H42Q")
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(data.table)
+library(rworldmap)
+library(ggthemes)
+library(reshape2)
+library(e1071)
+```
+
+#### We changed the class of the "date" column to Date type, and verified using the head function: 
+```{r message=FALSE, warning=FALSE}
+covid_data$date <- as.Date(as.character(covid_data$date))
+```
+```{r echo=FALSE}
+head(covid_data)
+```
+
+### B
+```{r}
+high_income_cases <- covid_data %>% select(date, new_cases) %>% filter(covid_data$location == "High income") %>% top_n(5, new_cases) 
+```
+#### Here is our data for new cases in high income countries:
+```{r echo=FALSE}
+high_income_cases
+```
+```{r} 
+high_income_deaths <- covid_data %>% select(date, new_deaths) %>% filter(covid_data$location == "High income") %>% top_n(5, new_deaths) 
+```
+#### New deaths for high income countries:
+```{r echo=FALSE}
+high_income_deaths
+```
+```{r}
+high_income_vaccinations <- covid_data %>% select(date, new_vaccinations) %>% filter(covid_data$location == "High income") %>% top_n(5, new_vaccinations) 
+```
+
+#### New vaccinations for high income countries:
+```{r echo=FALSE}
+high_income_vaccinations
+```
+# 2
+### A
+#### Here we built a functio that receives a data frame and a column name, and illustrates the differences between the high and low income countries, as a function of the date.
+```{r}
+low_vs_high_income <- function(data_frame, column) {
+  data_frame <- data_frame %>% drop_na(column)
+  data_frame <- data_frame %>% select(date, location, column) %>% filter(data_frame$location == c("High income", "Low income"))
+  ggplot(data_frame , aes(x = date, y = data_frame[[column]])) + 
+    ylab(column) + 
+    xlab("Date") +
+    geom_line(aes(color = location)) + 
+    scale_y_continuous(labels = scales::comma) + 
+    theme(legend.title = element_text(colour="black", size=12, 
+                                      face="bold")) + 
+    ggtitle("High income VS Low income countries") + 
+    theme(plot.title = element_text(hjust = 0.5))
+}
+```
+
+### B
+```{r}
+low_vs_high_income(covid_data, "new_cases_per_million")
+```
+```{r}
+low_vs_high_income_logged <- function(data_frame, column) {
+  data_frame <- data_frame %>% drop_na(column)
+  data_frame <- data_frame %>% select(date, location, column) %>% filter(data_frame$location == c("High income", "Low income"))
+  ggplot(data_frame , aes(x = date, y = data_frame[[column]])) + 
+    ylab(column) + 
+    xlab("Date") +
+    geom_line(aes(color = location)) + 
+    scale_y_continuous(labels = scales::comma, trans = 'log10') + 
+    theme(legend.title = element_text(colour="black", size=12, 
+                                      face="bold")) + 
+    ggtitle("High income VS Low income countries") + 
+    theme(plot.title = element_text(hjust = 0.5))
+}
+low_vs_high_income_logged(covid_data, "new_cases_smoothed_per_million")
+```
+
+#### As we can see the two plots look very different because of the log function applied on the y axis. In the first plot we can easily see the major differences in the new cases count, between the high income and low income countries. We assume that it's caused by the higher covid tests availability in the high income countries. In contrast, in the second plot we can better understand the new cases trend in both country economic types, but the actual numeric amount is harder to distinguish.
+
+#### Now we will look at the data of the logged new deaths and new vaccinations as a function of the date.
+```{r}
+low_vs_high_income_logged(covid_data, "new_deaths_smoothed")
+```
+
+#### We can see that the graph is pretty similar to the new cases plot. Further more, we can see that in the early stages of the pandemic the death rate was higher in relation to the new cases count and at later phase it moderated a bit. Another insight we can conclude is that in lower income countries, because of the lower number of identified new cases, they can match less deaths to the pandemic.
+
+```{r}
+low_vs_high_income_logged(covid_data, "new_vaccinations_smoothed")
+```
+#### We can see from the plot that with the advent of the convid vaccinations, masses came to get vaccinated in both low and high income countries. Another interesting insight concerens the timing of the of the arrival of vaccines. We can see that the high income countries got the vaccined before the low income countries, and we assume that the major difference in purchasing power is the cause.
+
+# 3
+### A
+```{r}
+columns_vec <- c("date", "total_cases_per_million", "total_deaths_per_million", "total_vaccinations_per_hundred", "people_vaccinated_per_hundred", "total_boosters_per_hundred", "excess_mortality_cumulative_per_million")
+
+current <- covid_data %>% select(location, continent, columns_vec) %>% group_by(location, continent) %>% summarize(date=last(date), total_cases_per_million=last(total_cases_per_million), total_deaths_per_million=last(total_deaths_per_million), total_vaccinations_per_hundred=last(total_vaccinations_per_hundred), people_vaccinated_per_hundred=last(people_vaccinated_per_hundred), total_boosters_per_hundred=last(total_boosters_per_hundred), excess_mortality_cumulative_per_million=last(excess_mortality_cumulative_per_million))
+```
+### B
+```{r}
+hist(current$total_deaths_per_million, breaks = 30)
+```
+
+#### We can clearly see that the histogram does not distribute in the normal structure. Now we'll calculate the skewness and kurtosis.
+```{r}
+skewness(current$total_deaths_per_million, TRUE)
+kurtosis(current$total_deaths_per_million, TRUE)
+```
+#### We can see that we got both positive skewness and positive kurtosis. The positive skewness indicated that our distribution is right skewed, and that the mean is higher than the median value. The positive kurtosis indicated that most of the sampled data is distributed further away from the median value compared to the normal distribution.
+
+### C
+
+```{r}
+options(scipen = 100)
+y <- c(current$total_deaths_per_million)
+x <- c(current$total_cases_per_million)
+ggplot(current, aes(x,y)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE)
+```
+```{r}
+options(scipen = 100)
+coef(lm(y~x))
+```
+
+#### The slope is 0.002723335. It represents that for each new case of detected covid, there is 0.002723335 new deaths, or in an easier to understand manner - for every new 367 new cases of covid, there will be approximately one death.
+
+
+# 4
+### A
+
+```{r}
+ggplot(current %>% filter(!continent == ""), aes(continent,total_vaccinations_per_hundred, fill = continent)) + 
+  geom_boxplot()
+```
+
+#### Now we will find two examples of outliers
+```{r}
+#[need to fix][problem happened when started loading the data set from online link in github]
+asia <- current %>% filter(continent == "Asia")
+n_america <- current %>% filter(continent == "North America")
+asia_outlier <- boxplot.stats(asia$total_vaccinations_per_hundred)$out
+n_america_outlier <- boxplot.stats(n_america$total_vaccinations_per_hundred)$out
+asia_name <- asia$location[which(asia$total_vaccinations_per_hundred == asia_outlier)]
+n_america_name <- n_america$location[which(n_america$total_vaccinations_per_hundred == n_america_outlier)]
+cat("An outlier in Asia is",asia_name, "with the value of",asia_outlier,"\nAn outlier in Asia is",n_america_name,"with the value of",n_america_outlier,"")
+```
+### B
+
+```{r}
+covid_data_4_b <- read.csv("/Users/Administrator/Desktop/לימודים/R/Lab_1/r52414_2021_22_lab1-orenstein_ido_and_salomon_gal/owid-covid-data_original.csv")
+```
+
+```{r}
+covid_data_booster_ratio <- covid_data_4_b %>% select(date, continent, total_boosters, people_fully_vaccinated) %>% group_by(date, continent) %>% summarize(total_boosters = sum(total_boosters, na.rm=TRUE), people_fully_vaccinated = sum(people_fully_vaccinated, na.rm=TRUE))
+covid_data_booster_ratio <- covid_data_booster_ratio %>% filter(!continent == "")
+covid_data_booster_ratio <- mutate(covid_data_booster_ratio, booster_ratio = (total_boosters/people_fully_vaccinated))
+covid_data_booster_ratio$booster_ratio[is.nan(covid_data_booster_ratio$booster_ratio)]<-NA
+covid_data_booster_ratio$date <- as.Date(covid_data_booster_ratio$date)
+```
+select(location, continent, columns_vec) %>% group_by(location, continent) %>% summarize(date=last(date), total_cases_per_million=last(total_cases_per_million),
+```{r}
+ggplot(covid_data_booster_ratio, aes(x=date, y=booster_ratio)) + 
+  geom_smooth(aes(color = continent), span=0.3)
+```
+
+# 5
+### A
+
+```{r}
+monthly_data <- subset(covid_data, date >= "2020-01-01" & date <= "2022-03-31") %>% 
+  mutate(year_month = format(date, "%Y/%m")) %>%
+  select(date, year_month, location, new_cases_per_million) %>%
+  group_by(year_month, location) %>%
+  summarize(date = min(date),new_cases_per_million = sum(new_cases_per_million))
+
+monthly_data$year_month <- paste(monthly_data$year_month, "/01", sep = "") %>%
+  as.Date(monthly_data$year_month, format = "%Y/%m/%d")
+
+ggplot(monthly_data, aes(x=year_month, y=new_cases_per_million, group = year_month)) +
+  geom_boxplot() +
+  xlab("Month & Year") + ylab("New cases per million")
+```
+
+
+### B
+```{r}
+monthly_data <- subset(covid_data, date >= "2020-01-01" & date <= "2022-03-31") %>% 
+  mutate(year_month = format(date, "%Y/%m")) %>%
+  select(date, year_month, location, new_deaths) %>%
+  group_by(year_month, location) %>%
+  summarize(date = min(date),new_deaths = sum(new_deaths))
+
+monthly_data$year_month <- paste(monthly_data$year_month, "/01", sep = "") %>%
+  as.Date(monthly_data$year_month, format = "%Y/%m/%d")
+
+ggplot(monthly_data, aes(x=year_month, y=new_deaths, group = year_month)) +
+  geom_boxplot() +
+  xlab("Month & Year") + ylab("New deaths")
+```
+```{r}
+monthly_data <- subset(covid_data, date >= "2020-01-01" & date <= "2022-03-31") %>% 
+  mutate(year_month = format(date, "%Y/%m")) %>%
+  select(date, year_month, location, new_vaccinations) %>%
+  group_by(year_month, location) %>%
+  summarize(date = min(date),new_vaccinations = sum(new_vaccinations))
+
+monthly_data$year_month <- paste(monthly_data$year_month, "/01", sep = "") %>%
+  as.Date(monthly_data$year_month, format = "%Y/%m/%d")
+
+ggplot(monthly_data, aes(x=year_month, y=new_vaccinations, group = year_month)) +
+  geom_boxplot() +
+  xlab("Month & Year") + ylab("New vaccinations")
+  
+```
+
+
+
+
+
+
