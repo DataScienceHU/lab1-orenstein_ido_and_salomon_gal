@@ -277,7 +277,49 @@ mapCountryData( world_map, nameColumnToPlot="excess_mortality_cumulative_per_mil
 #### We can see in general that in less developed countries the amounts of death is lower, but because we can see that also the vaccination rate is lower, we assume that the lower death numbers are due to the lack of proper tracking. In the third graph we can see that countries like Canada and Australia managed to cope better with the pandemic as reflected by the lower than expected death rate, in contrast to countries like USA and Russia.
 
 
-# NEED TO FIX: question 5
+# 8
+
+
+
+
+
+# 9
+### A
+```{r}
+covid_after_2020 <- covid_data %>% mutate(death_rate = (total_deaths/total_cases))
+covid_after_2020$date <- as.Date(covid_after_2020$date)
+covid_after_2020 <- covid_after_2020 [covid_after_2020$date >= "2021-01-01", ]
+covid_after_2020$continent [covid_after_2020$continent == ""] <- "World"
+ggplot(covid_after_2020 ,aes(x= date, y=death_rate)) +
+  geom_smooth(aes(color = continent))
+```
+
+#### In most continents we can see a decrease over the time line. The most plausible explanation is the advent of the covid vaccines.
+
+### B
+```{r}
+covid_after_2020_vac <- covid_data
+covid_after_2020_vac$date <- as.Date(covid_after_2020_vac$date)
+covid_after_2020_vac <- covid_after_2020_vac [covid_after_2020_vac$date >= "2021-01-01", ]
+covid_after_2020_vac$continent [covid_after_2020_vac$continent == ""] <- "World"
+ggplot(covid_after_2020_vac ,aes(x= date, y=total_vaccinations_per_hundred)) +
+  geom_smooth(aes(color = continent))
+```
+#### As we expected, the graphs that reflect the risk are negatively correlated with the graphs that reflect the amount of vaccines in the different continents.
+
+
+
+
+
+# 10
+
+
+
+
+
+
+
+# NEED TO FIX: question 5 (add descriptions)
 
 
 
