@@ -4,12 +4,14 @@ author: "Gal Salomon 316613140 & Ido Orenstein 316593870"
 date: "4/19/2022"
 output: html_document
 ---
-
+```{r include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+```
 
 # 1
 ### A
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-covid_data <- read.csv("https://raw.githubusercontent.com/DataScienceHU/r52414_2021_22_lab1-orenstein_ido_and_salomon_gal/main/owid-covid-data_original.csv?token=GHSAT0AAAAAABTWTYLKDMPUR7DU4OTB52CIYT2H42Q")
+covid_data <- read.csv("https://raw.githubusercontent.com/DataScienceHU/lab1-orenstein_ido_and_salomon_gal/main/owid-covid-data_original.csv")
 library(dplyr)
 library(tidyverse)
 library(ggplot2)
@@ -22,7 +24,7 @@ library(e1071)
 
 #### We changed the class of the "date" column to Date type, and verified using the head function: 
 ```{r message=FALSE, warning=FALSE}
-covid_data$date <- as.Date(as.character(covid_data$date))
+covid_data$date <- as.Date(covid_data$date)
 ```
 ```{r echo=FALSE}
 head(covid_data)
@@ -103,21 +105,27 @@ low_vs_high_income_logged(covid_data, "new_deaths_smoothed")
 ```{r}
 low_vs_high_income_logged(covid_data, "new_vaccinations_smoothed")
 ```
+
 #### We can see from the plot that with the advent of the convid vaccinations, masses came to get vaccinated in both low and high income countries. Another interesting insight concerens the timing of the of the arrival of vaccines. We can see that the high income countries got the vaccined before the low income countries, and we assume that the major difference in purchasing power is the cause.
 
 # 3
 ### A
 ```{r}
-columns_vec <- c("date", "total_cases_per_million", "total_deaths_per_million", "total_vaccinations_per_hundred", "people_vaccinated_per_hundred", "total_boosters_per_hundred", "excess_mortality_cumulative_per_million")
-
-current <- covid_data %>% select(location, continent, columns_vec) %>% group_by(location, continent) %>% summarize(date=last(date), total_cases_per_million=last(total_cases_per_million), total_deaths_per_million=last(total_deaths_per_million), total_vaccinations_per_hundred=last(total_vaccinations_per_hundred), people_vaccinated_per_hundred=last(people_vaccinated_per_hundred), total_boosters_per_hundred=last(total_boosters_per_hundred), excess_mortality_cumulative_per_million=last(excess_mortality_cumulative_per_million))
+columns_vec <- c("location", "continent", "total_cases_per_million", "total_deaths_per_million", "total_vaccinations_per_hundred", "people_vaccinated_per_hundred", "total_boosters_per_hundred", "excess_mortality_cumulative_per_million")
+current <- data.table(covid_data[,columns_vec])
+current <- current[, lapply(.SD, function(x) last(x[!is.na(x)])), by=location]
 ```
+
+
 ### B
 ```{r}
 hist(current$total_deaths_per_million, breaks = 30)
+qqnorm(current$total_deaths_per_million)
+qqline(current$total_deaths_per_million)
 ```
 
-#### We can clearly see that the histogram does not distribute in the normal structure. Now we'll calculate the skewness and kurtosis.
+
+#### We can clearly see from the histogram and the supporting qq plot, that it does not distribute in the normal structure. Now we'll calculate the skewness and kurtosis.
 ```{r}
 skewness(current$total_deaths_per_million, TRUE)
 kurtosis(current$total_deaths_per_million, TRUE)
@@ -139,7 +147,7 @@ options(scipen = 100)
 coef(lm(y~x))
 ```
 
-#### The slope is 0.002723335. It represents that for each new case of detected covid, there is 0.002723335 new deaths, or in an easier to understand manner - for every new 367 new cases of covid, there will be approximately one death.
+#### The slope is 0.00409004 It represents that for each new case of detected covid, there is 0.00409004 new deaths, or in an easier to understand manner - for every new 367 new cases of covid, there will be approximately one death.
 
 
 # 4
@@ -153,22 +161,18 @@ ggplot(current %>% filter(!continent == ""), aes(continent,total_vaccinations_pe
 #### Now we will find two examples of outliers
 ```{r}
 #[need to fix][problem happened when started loading the data set from online link in github]
-asia <- current %>% filter(continent == "Asia")
+europe <- current %>% filter(continent == "Europe")
+europe_outlier <- boxplot.stats(europe$total_vaccinations_per_hundred)$out
+europe_name <- europe$location[which(europe$total_vaccinations_per_hundred == europe_outlier)]
 n_america <- current %>% filter(continent == "North America")
-asia_outlier <- boxplot.stats(asia$total_vaccinations_per_hundred)$out
 n_america_outlier <- boxplot.stats(n_america$total_vaccinations_per_hundred)$out
-asia_name <- asia$location[which(asia$total_vaccinations_per_hundred == asia_outlier)]
 n_america_name <- n_america$location[which(n_america$total_vaccinations_per_hundred == n_america_outlier)]
-cat("An outlier in Asia is",asia_name, "with the value of",asia_outlier,"\nAn outlier in Asia is",n_america_name,"with the value of",n_america_outlier,"")
+cat("An outlier in Asia is",europe_name, "with the value of",europe_outlier,"\nAn outlier in North America is",n_america_name,"with the value of",n_america_outlier,"")
 ```
 ### B
 
 ```{r}
-covid_data_4_b <- read.csv("/Users/Administrator/Desktop/לימודים/R/Lab_1/r52414_2021_22_lab1-orenstein_ido_and_salomon_gal/owid-covid-data_original.csv")
-```
-
-```{r}
-covid_data_booster_ratio <- covid_data_4_b %>% select(date, continent, total_boosters, people_fully_vaccinated) %>% group_by(date, continent) %>% summarize(total_boosters = sum(total_boosters, na.rm=TRUE), people_fully_vaccinated = sum(people_fully_vaccinated, na.rm=TRUE))
+covid_data_booster_ratio <- covid_data %>% select(date, continent, total_boosters, people_fully_vaccinated) %>% group_by(date, continent) %>% summarize(total_boosters = sum(total_boosters, na.rm=TRUE), people_fully_vaccinated = sum(people_fully_vaccinated, na.rm=TRUE))
 covid_data_booster_ratio <- covid_data_booster_ratio %>% filter(!continent == "")
 covid_data_booster_ratio <- mutate(covid_data_booster_ratio, booster_ratio = (total_boosters/people_fully_vaccinated))
 covid_data_booster_ratio$booster_ratio[is.nan(covid_data_booster_ratio$booster_ratio)]<-NA
@@ -182,6 +186,7 @@ ggplot(covid_data_booster_ratio, aes(x=date, y=booster_ratio)) +
 
 # 5
 ### A
+# not complete - need to write few sentences on each plot
 
 ```{r}
 monthly_data <- subset(covid_data, date >= "2020-01-01" & date <= "2022-03-31") %>% 
@@ -197,7 +202,7 @@ ggplot(monthly_data, aes(x=year_month, y=new_cases_per_million, group = year_mon
   geom_boxplot() +
   xlab("Month & Year") + ylab("New cases per million")
 ```
-
+In the first graph we can see that
 
 ### B
 ```{r}
@@ -214,6 +219,7 @@ ggplot(monthly_data, aes(x=year_month, y=new_deaths, group = year_month)) +
   geom_boxplot() +
   xlab("Month & Year") + ylab("New deaths")
 ```
+
 ```{r}
 monthly_data <- subset(covid_data, date >= "2020-01-01" & date <= "2022-03-31") %>% 
   mutate(year_month = format(date, "%Y/%m")) %>%
@@ -229,6 +235,49 @@ ggplot(monthly_data, aes(x=year_month, y=new_vaccinations, group = year_month)) 
   xlab("Month & Year") + ylab("New vaccinations")
   
 ```
+# 6
+```{r}
+covid_data <- covid_data[order(covid_data$location, covid_data$date),]
+covid_data <- mutate(covid_data, R_cases = new_cases_smoothed/lag(new_cases_smoothed, n=7))
+covid_data$R_cases[covid_data$R_cases == 0 | covid_data$R_cases == Inf] <- NA
+```
+```{r}
+ggplot(covid_data %>% filter(location == c("United States", "Israel", "United Kingdom")), aes(x=date, y=R_cases)) +
+  geom_line(aes(color = location))
+```
+#### As we can see in the plot, we have few waves with an increased R value, but most of the time the R value ranges around 1. 
+
+```{r}
+covid_data %>% select(location, R_cases) %>% filter(location == c("Israel", "United States", "United Kingdom")) %>% group_by(location) %>% summarize("R above 1" = sum(R_cases > 1, na.rm = TRUE))
+```
+
+
+
+# 7
+
+```{r}
+world_map <- covid_data %>% select(location, total_deaths_per_million) %>% group_by(location) %>% summarise("total_deaths_per_million" = last(na.omit(total_deaths_per_million)))
+world_map <- joinCountryData2Map(world_map, joinCode = "NAME", nameJoinColumn = "location")
+mapCountryData( world_map, nameColumnToPlot="total_deaths_per_million", addLegend=TRUE)
+```
+#### Top 3 countries: Peru, Bulgaria and Bosnia & Herzegovina
+```{r}
+world_map <- covid_data %>% select(location, total_vaccinations_per_hundred) %>% group_by(location) %>% summarise("total_vaccinations_per_hundred" = last(na.omit(total_vaccinations_per_hundred)))
+world_map <- joinCountryData2Map(world_map, joinCode = "NAME", nameJoinColumn = "location")
+mapCountryData( world_map, nameColumnToPlot="total_vaccinations_per_hundred", addLegend=TRUE )
+```
+#### Top 3 countries: Cuba, Chile and New Zealand
+
+```{r}
+world_map <- covid_data %>% select(location, excess_mortality_cumulative_per_million) %>% group_by(location) %>% summarise("excess_mortality_cumulative_per_million" = last(na.omit(excess_mortality_cumulative_per_million)))
+world_map <- joinCountryData2Map(world_map, joinCode = "NAME", nameJoinColumn = "location")
+mapCountryData( world_map, nameColumnToPlot="excess_mortality_cumulative_per_million", addLegend=TRUE )
+```
+#### Top 3 countries: Bulgaria, Serbia and Russia
+#### We can see in general that in less developed countries the amounts of death is lower, but because we can see that also the vaccination rate is lower, we assume that the lower death numbers are due to the lack of proper tracking. In the third graph we can see that countries like Canada and Australia managed to cope better with the pandemic as reflected by the lower than expected death rate, in contrast to countries like USA and Russia.
+
+
+# NEED TO FIX: question 5
 
 
 
