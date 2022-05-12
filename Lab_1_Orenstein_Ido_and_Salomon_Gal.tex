@@ -1,0 +1,872 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\title{Lab\_1}
+\author{Gal Salomon 316613140 \& Ido Orenstein 316593870}
+\date{4/19/2022}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Lab\_1},
+  pdfauthor={Gal Salomon 316613140 \& Ido Orenstein 316593870},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+\maketitle
+
+\hypertarget{section}{%
+\section{1}\label{section}}
+
+\hypertarget{a}{%
+\subsubsection{A}\label{a}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{covid\_data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/DataScienceHU/lab1{-}orenstein\_ido\_and\_salomon\_gal/main/owid{-}covid{-}data\_original.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{we-changed-the-class-of-the-date-column-to-date-type-and-verified-using-the-class-function}{%
+\paragraph{We changed the class of the ``date'' column to Date type, and
+verified using the class
+function:}\label{we-changed-the-class-of-the-date-column-to-date-type-and-verified-using-the-class-function}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{covid\_data}\SpecialCharTok{$}\NormalTok{date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(covid\_data}\SpecialCharTok{$}\NormalTok{date)}
+\FunctionTok{class}\NormalTok{(covid\_data}\SpecialCharTok{$}\NormalTok{date)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Date"
+\end{verbatim}
+
+\hypertarget{b}{%
+\subsubsection{B}\label{b}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{high\_income\_cases }\OtherTok{\textless{}{-}}\NormalTok{ covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(date, new\_cases) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(covid\_data}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{==} \StringTok{"High income"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{top\_n}\NormalTok{(}\DecValTok{5}\NormalTok{, new\_cases)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{here-is-our-data-for-new-cases-in-high-income-countries}{%
+\paragraph{Here is our data for new cases in high income
+countries:}\label{here-is-our-data-for-new-cases-in-high-income-countries}}
+
+\begin{verbatim}
+##         date new_cases
+## 1 2022-01-10   2589365
+## 2 2022-01-18   2737804
+## 3 2022-01-19   2830533
+## 4 2022-01-21   2558959
+## 5 2022-01-26   2532201
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{high\_income\_deaths }\OtherTok{\textless{}{-}}\NormalTok{ covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(date, new\_deaths) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(covid\_data}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{==} \StringTok{"High income"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{top\_n}\NormalTok{(}\DecValTok{5}\NormalTok{, new\_deaths) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{new-deaths-for-high-income-countries}{%
+\paragraph{New deaths for high income
+countries:}\label{new-deaths-for-high-income-countries}}
+
+\begin{verbatim}
+##         date new_deaths
+## 1 2021-01-08       9967
+## 2 2021-01-12      10170
+## 3 2021-01-20      11047
+## 4 2021-01-26      10279
+## 5 2021-01-27      10079
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{high\_income\_vaccinations }\OtherTok{\textless{}{-}}\NormalTok{ covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(date, new\_vaccinations) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(covid\_data}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{==} \StringTok{"High income"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{top\_n}\NormalTok{(}\DecValTok{5}\NormalTok{, new\_vaccinations) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{new-vaccinations-for-high-income-countries}{%
+\paragraph{New vaccinations for high income
+countries:}\label{new-vaccinations-for-high-income-countries}}
+
+\begin{verbatim}
+##         date new_vaccinations
+## 1 2021-06-09          9452954
+## 2 2021-06-10          9539205
+## 3 2021-06-11          9505686
+## 4 2021-08-04         11980974
+## 5 2021-12-17          9749939
+\end{verbatim}
+
+\hypertarget{section-1}{%
+\section{2}\label{section-1}}
+
+\hypertarget{a-1}{%
+\subsubsection{A}\label{a-1}}
+
+\hypertarget{here-we-built-a-functio-that-receives-a-data-frame-and-a-column-name-and-illustrates-the-differences-between-the-high-and-low-income-countries-as-a-function-of-the-date.}{%
+\paragraph{Here we built a functio that receives a data frame and a
+column name, and illustrates the differences between the high and low
+income countries, as a function of the
+date.}\label{here-we-built-a-functio-that-receives-a-data-frame-and-a-column-name-and-illustrates-the-differences-between-the-high-and-low-income-countries-as-a-function-of-the-date.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{low\_vs\_high\_income }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data\_frame, column) \{}
+\NormalTok{  data\_frame }\OtherTok{\textless{}{-}}\NormalTok{ data\_frame }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{drop\_na}\NormalTok{(column)}
+\NormalTok{  data\_frame }\OtherTok{\textless{}{-}}\NormalTok{ data\_frame }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(date, location, column) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(data\_frame}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"High income"}\NormalTok{, }\StringTok{"Low income"}\NormalTok{))}
+  \FunctionTok{ggplot}\NormalTok{(data\_frame , }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ data\_frame[[column]])) }\SpecialCharTok{+} 
+    \FunctionTok{ylab}\NormalTok{(column) }\SpecialCharTok{+} 
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{"Date"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ location)) }\SpecialCharTok{+} 
+    \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{comma) }\SpecialCharTok{+} 
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{, }\AttributeTok{size=}\DecValTok{12}\NormalTok{, }
+                                      \AttributeTok{face=}\StringTok{"bold"}\NormalTok{)) }\SpecialCharTok{+} 
+    \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"High income VS Low income countries"}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{b-1}{%
+\subsubsection{B}\label{b-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{low\_vs\_high\_income}\NormalTok{(covid\_data, }\StringTok{"new\_cases\_per\_million"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{low\_vs\_high\_income\_logged }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data\_frame, column) \{}
+\NormalTok{  data\_frame }\OtherTok{\textless{}{-}}\NormalTok{ data\_frame }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{drop\_na}\NormalTok{(column)}
+\NormalTok{  data\_frame }\OtherTok{\textless{}{-}}\NormalTok{ data\_frame }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(date, location, column) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(data\_frame}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"High income"}\NormalTok{, }\StringTok{"Low income"}\NormalTok{))}
+  \FunctionTok{ggplot}\NormalTok{(data\_frame , }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ data\_frame[[column]])) }\SpecialCharTok{+} 
+    \FunctionTok{ylab}\NormalTok{(column) }\SpecialCharTok{+} 
+    \FunctionTok{xlab}\NormalTok{(}\StringTok{"Date"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ location)) }\SpecialCharTok{+} 
+    \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{comma, }\AttributeTok{trans =} \StringTok{\textquotesingle{}log10\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{colour=}\StringTok{"black"}\NormalTok{, }\AttributeTok{size=}\DecValTok{12}\NormalTok{, }
+                                      \AttributeTok{face=}\StringTok{"bold"}\NormalTok{)) }\SpecialCharTok{+} 
+    \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"High income VS Low income countries"}\NormalTok{) }\SpecialCharTok{+} 
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\NormalTok{\}}
+\FunctionTok{low\_vs\_high\_income\_logged}\NormalTok{(covid\_data, }\StringTok{"new\_cases\_smoothed\_per\_million"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\hypertarget{as-we-can-see-the-two-plots-look-very-different-because-of-the-log-function-applied-on-the-y-axis.-in-the-first-plot-we-can-easily-see-the-major-differences-in-the-new-cases-count-between-the-high-income-and-low-income-countries.-we-assume-that-its-caused-by-the-higher-covid-tests-availability-in-the-high-income-countries.-in-contrast-in-the-second-plot-we-can-better-understand-the-new-cases-trend-in-both-country-economic-types-but-the-actual-numeric-amount-is-harder-to-distinguish.}{%
+\paragraph{As we can see the two plots look very different because of
+the log function applied on the y axis. In the first plot we can easily
+see the major differences in the new cases count, between the high
+income and low income countries. We assume that it's caused by the
+higher covid tests availability in the high income countries. In
+contrast, in the second plot we can better understand the new cases
+trend in both country economic types, but the actual numeric amount is
+harder to
+distinguish.}\label{as-we-can-see-the-two-plots-look-very-different-because-of-the-log-function-applied-on-the-y-axis.-in-the-first-plot-we-can-easily-see-the-major-differences-in-the-new-cases-count-between-the-high-income-and-low-income-countries.-we-assume-that-its-caused-by-the-higher-covid-tests-availability-in-the-high-income-countries.-in-contrast-in-the-second-plot-we-can-better-understand-the-new-cases-trend-in-both-country-economic-types-but-the-actual-numeric-amount-is-harder-to-distinguish.}}
+
+\hypertarget{now-we-will-look-at-the-data-of-the-logged-new-deaths-and-new-vaccinations-as-a-function-of-the-date.}{%
+\paragraph{Now we will look at the data of the logged new deaths and new
+vaccinations as a function of the
+date.}\label{now-we-will-look-at-the-data-of-the-logged-new-deaths-and-new-vaccinations-as-a-function-of-the-date.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{low\_vs\_high\_income\_logged}\NormalTok{(covid\_data, }\StringTok{"new\_deaths\_smoothed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\hypertarget{we-can-see-that-the-graph-is-pretty-similar-to-the-new-cases-plot.-further-more-we-can-see-that-in-the-early-stages-of-the-pandemic-the-death-rate-was-higher-in-relation-to-the-new-cases-count-and-at-later-phase-it-moderated-a-bit.-another-insight-we-can-conclude-is-that-in-lower-income-countries-because-of-the-lower-number-of-identified-new-cases-they-can-match-less-deaths-to-the-pandemic.}{%
+\paragraph{We can see that the graph is pretty similar to the new cases
+plot. Further more, we can see that in the early stages of the pandemic
+the death rate was higher in relation to the new cases count and at
+later phase it moderated a bit. Another insight we can conclude is that
+in lower income countries, because of the lower number of identified new
+cases, they can match less deaths to the
+pandemic.}\label{we-can-see-that-the-graph-is-pretty-similar-to-the-new-cases-plot.-further-more-we-can-see-that-in-the-early-stages-of-the-pandemic-the-death-rate-was-higher-in-relation-to-the-new-cases-count-and-at-later-phase-it-moderated-a-bit.-another-insight-we-can-conclude-is-that-in-lower-income-countries-because-of-the-lower-number-of-identified-new-cases-they-can-match-less-deaths-to-the-pandemic.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{low\_vs\_high\_income\_logged}\NormalTok{(covid\_data, }\StringTok{"new\_vaccinations\_smoothed"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\hypertarget{we-can-see-from-the-plot-that-with-the-advent-of-the-convid-vaccinations-masses-came-to-get-vaccinated-in-both-low-and-high-income-countries.-another-interesting-insight-concerens-the-timing-of-the-of-the-arrival-of-vaccines.-we-can-see-that-the-high-income-countries-got-the-vaccined-before-the-low-income-countries-and-we-assume-that-the-major-difference-in-purchasing-power-is-the-cause.}{%
+\paragraph{We can see from the plot that with the advent of the convid
+vaccinations, masses came to get vaccinated in both low and high income
+countries. Another interesting insight concerens the timing of the of
+the arrival of vaccines. We can see that the high income countries got
+the vaccined before the low income countries, and we assume that the
+major difference in purchasing power is the
+cause.}\label{we-can-see-from-the-plot-that-with-the-advent-of-the-convid-vaccinations-masses-came-to-get-vaccinated-in-both-low-and-high-income-countries.-another-interesting-insight-concerens-the-timing-of-the-of-the-arrival-of-vaccines.-we-can-see-that-the-high-income-countries-got-the-vaccined-before-the-low-income-countries-and-we-assume-that-the-major-difference-in-purchasing-power-is-the-cause.}}
+
+\hypertarget{section-2}{%
+\section{3}\label{section-2}}
+
+\hypertarget{a-2}{%
+\subsubsection{A}\label{a-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{columns\_vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"location"}\NormalTok{, }\StringTok{"continent"}\NormalTok{, }\StringTok{"total\_cases\_per\_million"}\NormalTok{, }\StringTok{"total\_deaths\_per\_million"}\NormalTok{, }\StringTok{"total\_vaccinations\_per\_hundred"}\NormalTok{, }\StringTok{"people\_vaccinated\_per\_hundred"}\NormalTok{, }\StringTok{"total\_boosters\_per\_hundred"}\NormalTok{, }\StringTok{"excess\_mortality\_cumulative\_per\_million"}\NormalTok{)}
+\NormalTok{current }\OtherTok{\textless{}{-}} \FunctionTok{data.table}\NormalTok{(covid\_data[,columns\_vec])}
+\NormalTok{current }\OtherTok{\textless{}{-}}\NormalTok{ current[, }\FunctionTok{lapply}\NormalTok{(.SD, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{last}\NormalTok{(x[}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(x)])), by}\OtherTok{=}\NormalTok{location]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{b-2}{%
+\subsubsection{B}\label{b-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(current, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ total\_deaths\_per\_million)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{30}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"grey"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Total deaths per million"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(current, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{sample=}\NormalTok{total\_deaths\_per\_million)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_qq}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_qq\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Theoretical quantiles"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Sample quantiles"}\NormalTok{, }\AttributeTok{title =} \StringTok{"QQ plot"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-16-2.pdf}
+
+\hypertarget{we-can-clearly-see-from-the-histogram-and-the-supporting-qq-plot-that-it-does-not-distribute-in-the-normal-structure.-now-well-calculate-the-skewness-and-kurtosis.}{%
+\paragraph{We can clearly see from the histogram and the supporting qq
+plot, that it does not distribute in the normal structure. Now we'll
+calculate the skewness and
+kurtosis.}\label{we-can-clearly-see-from-the-histogram-and-the-supporting-qq-plot-that-it-does-not-distribute-in-the-normal-structure.-now-well-calculate-the-skewness-and-kurtosis.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{skewness}\NormalTok{(current}\SpecialCharTok{$}\NormalTok{total\_deaths\_per\_million, }\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.306928
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kurtosis}\NormalTok{(current}\SpecialCharTok{$}\NormalTok{total\_deaths\_per\_million, }\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.62664
+\end{verbatim}
+
+\hypertarget{we-can-see-that-we-got-both-positive-skewness-and-positive-kurtosis.-the-positive-skewness-indicated-that-our-distribution-is-right-skewed-and-that-the-mean-is-higher-than-the-median-value.-the-positive-kurtosis-indicated-that-most-of-the-sampled-data-is-distributed-further-away-from-the-median-value-compared-to-the-normal-distribution.}{%
+\paragraph{We can see that we got both positive skewness and positive
+kurtosis. The positive skewness indicated that our distribution is right
+skewed, and that the mean is higher than the median value. The positive
+kurtosis indicated that most of the sampled data is distributed further
+away from the median value compared to the normal
+distribution.}\label{we-can-see-that-we-got-both-positive-skewness-and-positive-kurtosis.-the-positive-skewness-indicated-that-our-distribution-is-right-skewed-and-that-the-mean-is-higher-than-the-median-value.-the-positive-kurtosis-indicated-that-most-of-the-sampled-data-is-distributed-further-away-from-the-median-value-compared-to-the-normal-distribution.}}
+
+\hypertarget{c}{%
+\subsubsection{C}\label{c}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{scipen =} \DecValTok{100}\NormalTok{)}
+\FunctionTok{ggplot}\NormalTok{(current, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ current}\SpecialCharTok{$}\NormalTok{total\_cases\_per\_million ,}\AttributeTok{y =}\NormalTok{ current}\SpecialCharTok{$}\NormalTok{total\_deaths\_per\_million)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =}\NormalTok{ lm, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Total cases per million"}\NormalTok{, }\AttributeTok{y=} \StringTok{"Total deaths per million"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-18-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{coef}\NormalTok{(}\FunctionTok{lm}\NormalTok{(current}\SpecialCharTok{$}\NormalTok{total\_deaths\_per\_million}\SpecialCharTok{\textasciitilde{}}\NormalTok{current}\SpecialCharTok{$}\NormalTok{total\_cases\_per\_million))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                     (Intercept) current$total_cases_per_million 
+##                    584.49340781                      0.00409004
+\end{verbatim}
+
+\hypertarget{the-slope-is-0.00409004-it-represents-that-for-each-new-case-of-detected-covid-there-is-0.00409004-new-deaths-or-in-an-easier-to-understand-manner---for-every-new-367-new-cases-of-covid-there-will-be-approximately-one-death.}{%
+\paragraph{The slope is 0.00409004 it represents that for each new case
+of detected covid, there is 0.00409004 new deaths, or in an easier to
+understand manner - for every new 367 new cases of covid, there will be
+approximately one
+death.}\label{the-slope-is-0.00409004-it-represents-that-for-each-new-case-of-detected-covid-there-is-0.00409004-new-deaths-or-in-an-easier-to-understand-manner---for-every-new-367-new-cases-of-covid-there-will-be-approximately-one-death.}}
+
+\hypertarget{section-3}{%
+\section{4}\label{section-3}}
+
+\hypertarget{a-3}{%
+\subsubsection{A}\label{a-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(current }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{continent }\SpecialCharTok{==} \StringTok{""}\NormalTok{), }\FunctionTok{aes}\NormalTok{(continent,total\_vaccinations\_per\_hundred, }\AttributeTok{fill =}\NormalTok{ continent)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{theme\_solarized}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Continent"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Total vaccinations per hundred"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\hypertarget{now-we-will-find-two-examples-of-outliers}{%
+\paragraph{Now we will find two examples of
+outliers}\label{now-we-will-find-two-examples-of-outliers}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#[need to fix][problem happened when started loading the data set from online link in github]}
+\NormalTok{europe }\OtherTok{\textless{}{-}}\NormalTok{ current }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(continent }\SpecialCharTok{==} \StringTok{"Europe"}\NormalTok{)}
+\NormalTok{europe\_outlier }\OtherTok{\textless{}{-}} \FunctionTok{boxplot.stats}\NormalTok{(europe}\SpecialCharTok{$}\NormalTok{total\_vaccinations\_per\_hundred)}\SpecialCharTok{$}\NormalTok{out}
+\NormalTok{europe\_name }\OtherTok{\textless{}{-}}\NormalTok{ europe}\SpecialCharTok{$}\NormalTok{location[}\FunctionTok{which}\NormalTok{(europe}\SpecialCharTok{$}\NormalTok{total\_vaccinations\_per\_hundred }\SpecialCharTok{==}\NormalTok{ europe\_outlier)]}
+\NormalTok{n\_america }\OtherTok{\textless{}{-}}\NormalTok{ current }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(continent }\SpecialCharTok{==} \StringTok{"North America"}\NormalTok{)}
+\NormalTok{n\_america\_outlier }\OtherTok{\textless{}{-}} \FunctionTok{boxplot.stats}\NormalTok{(n\_america}\SpecialCharTok{$}\NormalTok{total\_vaccinations\_per\_hundred)}\SpecialCharTok{$}\NormalTok{out}
+\NormalTok{n\_america\_name }\OtherTok{\textless{}{-}}\NormalTok{ n\_america}\SpecialCharTok{$}\NormalTok{location[}\FunctionTok{which}\NormalTok{(n\_america}\SpecialCharTok{$}\NormalTok{total\_vaccinations\_per\_hundred }\SpecialCharTok{==}\NormalTok{ n\_america\_outlier)]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{an-outlier-in-europe-is-gibraltar-with-the-value-of-354.93}{%
+\subparagraph{An outlier in Europe is Gibraltar with the value of
+354.93}\label{an-outlier-in-europe-is-gibraltar-with-the-value-of-354.93}}
+
+\hypertarget{an-outlier-in-north-america-is-cuba-with-the-value-of-314.61}{%
+\subparagraph{An outlier in North America is Cuba with the value of
+314.61}\label{an-outlier-in-north-america-is-cuba-with-the-value-of-314.61}}
+
+\hypertarget{b-3}{%
+\subsubsection{B}\label{b-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{covid\_data\_booster\_ratio }\OtherTok{\textless{}{-}}\NormalTok{ covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(date, continent, total\_boosters, people\_fully\_vaccinated) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(date, continent) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{total\_boosters =} \FunctionTok{sum}\NormalTok{(total\_boosters, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{), }\AttributeTok{people\_fully\_vaccinated =} \FunctionTok{sum}\NormalTok{(people\_fully\_vaccinated, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{))}
+\NormalTok{covid\_data\_booster\_ratio }\OtherTok{\textless{}{-}}\NormalTok{ covid\_data\_booster\_ratio }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{continent }\SpecialCharTok{==} \StringTok{""}\NormalTok{)}
+\NormalTok{covid\_data\_booster\_ratio }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(covid\_data\_booster\_ratio, }\AttributeTok{booster\_ratio =}\NormalTok{ (total\_boosters}\SpecialCharTok{/}\NormalTok{people\_fully\_vaccinated))}
+\NormalTok{covid\_data\_booster\_ratio}\SpecialCharTok{$}\NormalTok{booster\_ratio[}\FunctionTok{is.nan}\NormalTok{(covid\_data\_booster\_ratio}\SpecialCharTok{$}\NormalTok{booster\_ratio)]}\OtherTok{\textless{}{-}}\ConstantTok{NA}
+\NormalTok{covid\_data\_booster\_ratio}\SpecialCharTok{$}\NormalTok{date }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(covid\_data\_booster\_ratio}\SpecialCharTok{$}\NormalTok{date)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(covid\_data\_booster\_ratio, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{date, }\AttributeTok{y=}\NormalTok{booster\_ratio)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ continent), }\AttributeTok{span=}\FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Booster ratio"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\hypertarget{section-4}{%
+\section{5}\label{section-4}}
+
+\hypertarget{a-4}{%
+\subsubsection{A}\label{a-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{monthly\_data }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(covid\_data, date }\SpecialCharTok{\textgreater{}=} \StringTok{"2020{-}01{-}01"} \SpecialCharTok{\&}\NormalTok{ date }\SpecialCharTok{\textless{}=} \StringTok{"2022{-}03{-}31"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{year\_month =} \FunctionTok{format}\NormalTok{(date, }\StringTok{"\%Y/\%m"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(date, year\_month, location, new\_cases\_per\_million) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(year\_month, location) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{date =} \FunctionTok{min}\NormalTok{(date),}\AttributeTok{new\_cases\_per\_million =} \FunctionTok{sum}\NormalTok{(new\_cases\_per\_million))}
+
+\NormalTok{monthly\_data}\SpecialCharTok{$}\NormalTok{year\_month }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(monthly\_data}\SpecialCharTok{$}\NormalTok{year\_month, }\StringTok{"/01"}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.Date}\NormalTok{(monthly\_data}\SpecialCharTok{$}\NormalTok{year\_month, }\AttributeTok{format =} \StringTok{"\%Y/\%m/\%d"}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(monthly\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{year\_month, }\AttributeTok{y=}\NormalTok{new\_cases\_per\_million, }\AttributeTok{group =}\NormalTok{ year\_month)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Month \& Year"}\NormalTok{, }\AttributeTok{y =} \StringTok{"New cases per million"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-24-1.pdf}
+
+\hypertarget{in-the-first-plot-we-can-see-that-as-the-pandemic-progressed-the-new-cases-per-million-vary-more-between-the-countries.-we-believe-that-this-is-because-more-and-more-countries-understood-how-to-cope-better-with-the-pandemic-in-contrast-to-other-countries-with-the-contributing-fact-that-the-covid-tests-probably-reached-the-less-developed-countries-only-at-a-later-phase.}{%
+\paragraph{In the first plot we can see that as the pandemic progressed,
+the new cases per million vary more between the countries. We believe
+that this is because more and more countries understood how to cope
+better with the pandemic, in contrast to other countries, with the
+contributing fact that the covid tests probably reached the less
+developed countries only at a later
+phase.}\label{in-the-first-plot-we-can-see-that-as-the-pandemic-progressed-the-new-cases-per-million-vary-more-between-the-countries.-we-believe-that-this-is-because-more-and-more-countries-understood-how-to-cope-better-with-the-pandemic-in-contrast-to-other-countries-with-the-contributing-fact-that-the-covid-tests-probably-reached-the-less-developed-countries-only-at-a-later-phase.}}
+
+\hypertarget{b-4}{%
+\subsubsection{B}\label{b-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{monthly\_data }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(covid\_data, date }\SpecialCharTok{\textgreater{}=} \StringTok{"2020{-}01{-}01"} \SpecialCharTok{\&}\NormalTok{ date }\SpecialCharTok{\textless{}=} \StringTok{"2022{-}03{-}31"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{year\_month =} \FunctionTok{format}\NormalTok{(date, }\StringTok{"\%Y/\%m"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(date, year\_month, location, new\_deaths) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(year\_month, location) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{date =} \FunctionTok{min}\NormalTok{(date),}\AttributeTok{new\_deaths =} \FunctionTok{sum}\NormalTok{(new\_deaths))}
+
+\NormalTok{monthly\_data}\SpecialCharTok{$}\NormalTok{year\_month }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(monthly\_data}\SpecialCharTok{$}\NormalTok{year\_month, }\StringTok{"/01"}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.Date}\NormalTok{(monthly\_data}\SpecialCharTok{$}\NormalTok{year\_month, }\AttributeTok{format =} \StringTok{"\%Y/\%m/\%d"}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(monthly\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{year\_month, }\AttributeTok{y=}\NormalTok{new\_deaths, }\AttributeTok{group =}\NormalTok{ year\_month)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Month \& Year"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"New deaths"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+\hypertarget{we-can-see-from-the-second-plot-that-the-new-deaths-distributed-pretty-consistently-between-the-countries-through-the-whole-pandemic.}{%
+\paragraph{We can see from the second plot that the new deaths
+distributed pretty consistently between the countries through the whole
+pandemic.}\label{we-can-see-from-the-second-plot-that-the-new-deaths-distributed-pretty-consistently-between-the-countries-through-the-whole-pandemic.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{monthly\_data }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(covid\_data, date }\SpecialCharTok{\textgreater{}=} \StringTok{"2020{-}01{-}01"} \SpecialCharTok{\&}\NormalTok{ date }\SpecialCharTok{\textless{}=} \StringTok{"2022{-}03{-}31"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{year\_month =} \FunctionTok{format}\NormalTok{(date, }\StringTok{"\%Y/\%m"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(date, year\_month, location, new\_vaccinations) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(year\_month, location) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{date =} \FunctionTok{min}\NormalTok{(date),}\AttributeTok{new\_vaccinations =} \FunctionTok{sum}\NormalTok{(new\_vaccinations))}
+
+\NormalTok{monthly\_data}\SpecialCharTok{$}\NormalTok{year\_month }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(monthly\_data}\SpecialCharTok{$}\NormalTok{year\_month, }\StringTok{"/01"}\NormalTok{, }\AttributeTok{sep =} \StringTok{""}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.Date}\NormalTok{(monthly\_data}\SpecialCharTok{$}\NormalTok{year\_month, }\AttributeTok{format =} \StringTok{"\%Y/\%m/\%d"}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(monthly\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{year\_month, }\AttributeTok{y=}\NormalTok{new\_vaccinations, }\AttributeTok{group =}\NormalTok{ year\_month)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Month \& Year"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\StringTok{"New vaccinations"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-26-1.pdf}
+
+\hypertarget{in-the-third-plot-we-can-see-that-the-new-vaccinations-amounts-varied-more-at-a-later-phase.-we-assume-this-is-because-the-vaccinations-reached-less-developed-countries-only-after-the-more-developed-countries-so-in-the-begining-of-the-pandemic-more-values-were-close-to-0.}{%
+\paragraph{In the third plot we can see that the new vaccinations
+amounts varied more at a later phase. We assume this is because the
+vaccinations reached less developed countries only after the more
+developed countries, so in the begining of the pandemic more values were
+close to
+0.}\label{in-the-third-plot-we-can-see-that-the-new-vaccinations-amounts-varied-more-at-a-later-phase.-we-assume-this-is-because-the-vaccinations-reached-less-developed-countries-only-after-the-more-developed-countries-so-in-the-begining-of-the-pandemic-more-values-were-close-to-0.}}
+
+\hypertarget{overall-we-can-conclude-that-because-of-the-different-times-that-the-vaccinations-and-covid-tests-arrived-specific-countries-the-data-can-be-problematic-to-interpret-without-actually-showing-the-amount-of-test-and-vaccines-entered-the-country.}{%
+\paragraph{Overall, we can conclude that because of the different times
+that the vaccinations and covid tests arrived specific countries, the
+data can be problematic to interpret without actually showing the amount
+of test and vaccines entered the
+country.}\label{overall-we-can-conclude-that-because-of-the-different-times-that-the-vaccinations-and-covid-tests-arrived-specific-countries-the-data-can-be-problematic-to-interpret-without-actually-showing-the-amount-of-test-and-vaccines-entered-the-country.}}
+
+\hypertarget{section-5}{%
+\section{6}\label{section-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{covid\_data }\OtherTok{\textless{}{-}}\NormalTok{ covid\_data[}\FunctionTok{order}\NormalTok{(covid\_data}\SpecialCharTok{$}\NormalTok{location, covid\_data}\SpecialCharTok{$}\NormalTok{date),]}
+\NormalTok{covid\_data }\OtherTok{\textless{}{-}} \FunctionTok{mutate}\NormalTok{(covid\_data, }\AttributeTok{R\_cases =}\NormalTok{ new\_cases\_smoothed}\SpecialCharTok{/}\FunctionTok{lag}\NormalTok{(new\_cases\_smoothed, }\AttributeTok{n=}\DecValTok{7}\NormalTok{))}
+\NormalTok{covid\_data}\SpecialCharTok{$}\NormalTok{R\_cases[covid\_data}\SpecialCharTok{$}\NormalTok{R\_cases }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{|}\NormalTok{ covid\_data}\SpecialCharTok{$}\NormalTok{R\_cases }\SpecialCharTok{==} \ConstantTok{Inf}\NormalTok{] }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(location }\SpecialCharTok{==} \FunctionTok{c}\NormalTok{(}\StringTok{"United States"}\NormalTok{, }\StringTok{"Israel"}\NormalTok{, }\StringTok{"United Kingdom"}\NormalTok{)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{date, }\AttributeTok{y=}\NormalTok{R\_cases)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ location)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"R rate"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\hypertarget{since-it-is-a-bit-hard-to-read-we-will-create-an-extra-plot-to-help-us-interpret-the-data.}{%
+\paragraph{Since it is a bit hard to read we will create an extra plot
+to help us interpret the
+data.}\label{since-it-is-a-bit-hard-to-read-we-will-create-an-extra-plot-to-help-us-interpret-the-data.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(location }\SpecialCharTok{==} \FunctionTok{c}\NormalTok{(}\StringTok{"United States"}\NormalTok{, }\StringTok{"Israel"}\NormalTok{, }\StringTok{"United Kingdom"}\NormalTok{)), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{date, }\AttributeTok{y=}\NormalTok{R\_cases)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ location), }\AttributeTok{span=}\FloatTok{0.2}\NormalTok{, }\AttributeTok{se =}\NormalTok{ F) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{), }\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{slope=}\DecValTok{0}\NormalTok{, }\AttributeTok{intercept=}\DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"R rate"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+\hypertarget{as-we-can-see-in-the-plot-we-have-a-few-waves-with-an-increased-r-value-but-most-of-the-time-the-r-value-ranges-around-1.}{%
+\paragraph{As we can see in the plot, we have a few waves with an
+increased R value, but most of the time the R value ranges around
+1.}\label{as-we-can-see-in-the-plot-we-have-a-few-waves-with-an-increased-r-value-but-most-of-the-time-the-r-value-ranges-around-1.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(location, R\_cases) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(location }\SpecialCharTok{==} \FunctionTok{c}\NormalTok{(}\StringTok{"Israel"}\NormalTok{, }\StringTok{"United States"}\NormalTok{, }\StringTok{"United Kingdom"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(location) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{(}\StringTok{"R above 1"} \OtherTok{=} \FunctionTok{sum}\NormalTok{(R\_cases }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+##   location       `R above 1`
+##   <chr>                <int>
+## 1 Israel                 133
+## 2 United Kingdom         148
+## 3 United States          130
+\end{verbatim}
+
+\hypertarget{section-6}{%
+\section{7}\label{section-6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{world\_map }\OtherTok{\textless{}{-}} \FunctionTok{joinCountryData2Map}\NormalTok{(current, }\AttributeTok{joinCode =} \StringTok{"NAME"}\NormalTok{, }\AttributeTok{nameJoinColumn =} \StringTok{"location"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 218 codes from your data successfully matched countries in the map
+## 24 codes from your data failed to match with a country code in the map
+## 25 codes from the map weren't represented in your data
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mapCountryData}\NormalTok{(world\_map, }\AttributeTok{nameColumnToPlot=}\StringTok{"total\_deaths\_per\_million"}\NormalTok{, }\AttributeTok{addLegend=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{missingCountryCol =} \StringTok{"white"}\NormalTok{, }\AttributeTok{mapTitle =} \StringTok{"Total deaths per million"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-31-1.pdf}
+
+\hypertarget{top-3-countries-peru-bulgaria-and-bosnia-herzegovina}{%
+\paragraph{Top 3 countries: Peru, Bulgaria and Bosnia \&
+Herzegovina}\label{top-3-countries-peru-bulgaria-and-bosnia-herzegovina}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mapCountryData}\NormalTok{(world\_map, }\AttributeTok{nameColumnToPlot=}\StringTok{"total\_vaccinations\_per\_hundred"}\NormalTok{, }\AttributeTok{addLegend=}\ConstantTok{TRUE}\NormalTok{,}
+               \AttributeTok{missingCountryCol =} \StringTok{"white"}\NormalTok{, }\AttributeTok{mapTitle =} \StringTok{"Total vaccinations per hundred"}\NormalTok{, }\AttributeTok{colourPalette =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"orange"}\NormalTok{, }\StringTok{"yellow"}\NormalTok{, }\StringTok{"chartreuse3"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-32-1.pdf}
+
+\hypertarget{top-3-countries-cuba-chile-and-gibraltar}{%
+\paragraph{Top 3 countries: Cuba, Chile and
+Gibraltar}\label{top-3-countries-cuba-chile-and-gibraltar}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mapCountryData}\NormalTok{( world\_map, }\AttributeTok{nameColumnToPlot=}\StringTok{"excess\_mortality\_cumulative\_per\_million"}\NormalTok{, }\AttributeTok{addLegend=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{missingCountryCol =} \StringTok{"white"}\NormalTok{, }\AttributeTok{mapTitle =} \StringTok{"Excess mortality cumulative per million"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-33-1.pdf}
+
+\hypertarget{top-3-countries-bulgaria-serbia-and-russia}{%
+\paragraph{Top 3 countries: Bulgaria, Serbia and
+Russia}\label{top-3-countries-bulgaria-serbia-and-russia}}
+
+\hypertarget{we-can-see-in-general-that-in-less-developed-countries-the-amounts-of-death-is-lower-but-because-we-can-see-that-also-the-vaccination-rate-is-lower-we-assume-that-the-lower-death-numbers-are-due-to-the-lack-of-proper-tracking.-in-the-third-graph-we-can-see-that-countries-like-canada-and-australia-managed-to-cope-better-with-the-pandemic-as-reflected-by-the-lower-than-expected-death-rate-in-contrast-to-countries-like-usa-and-russia.}{%
+\paragraph{We can see in general that in less developed countries the
+amounts of death is lower, but because we can see that also the
+vaccination rate is lower, we assume that the lower death numbers are
+due to the lack of proper tracking. In the third graph we can see that
+countries like Canada and Australia managed to cope better with the
+pandemic as reflected by the lower than expected death rate, in contrast
+to countries like USA and
+Russia.}\label{we-can-see-in-general-that-in-less-developed-countries-the-amounts-of-death-is-lower-but-because-we-can-see-that-also-the-vaccination-rate-is-lower-we-assume-that-the-lower-death-numbers-are-due-to-the-lack-of-proper-tracking.-in-the-third-graph-we-can-see-that-countries-like-canada-and-australia-managed-to-cope-better-with-the-pandemic-as-reflected-by-the-lower-than-expected-death-rate-in-contrast-to-countries-like-usa-and-russia.}}
+
+\hypertarget{section-7}{%
+\section{8}\label{section-7}}
+
+\hypertarget{a-5}{%
+\subsubsection{A}\label{a-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Cross\_Cor\_fun }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df, country, col\_1, col\_2) \{}
+\NormalTok{  df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(location }\SpecialCharTok{==}\NormalTok{ country)}
+\NormalTok{  res }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{121}\NormalTok{))}
+\NormalTok{  col1 }\OtherTok{\textless{}{-}}\NormalTok{ df[[col\_1]]}
+\NormalTok{  col2 }\OtherTok{\textless{}{-}}\NormalTok{ df[[col\_2]]}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{60}\SpecialCharTok{:}\DecValTok{0}\NormalTok{) \{}
+\NormalTok{    res[}\DecValTok{61} \SpecialCharTok{{-}}\NormalTok{ i] }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(col2[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(df)}\SpecialCharTok{{-}}\NormalTok{ i)], col1 [ ( i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{) }\SpecialCharTok{:} \FunctionTok{nrow}\NormalTok{(df)] , }\AttributeTok{use =} \StringTok{"pairwise.complete.obs"}\NormalTok{)}
+
+\NormalTok{  \}}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{60}\NormalTok{) \{}
+\NormalTok{    res[i }\SpecialCharTok{+}\DecValTok{61}\NormalTok{] }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(col1[}\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(df)}\SpecialCharTok{{-}}\NormalTok{ i)], col2 [ ( i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{) }\SpecialCharTok{:} \FunctionTok{nrow}\NormalTok{(df)] , }\AttributeTok{use =} \StringTok{"pairwise.complete.obs"}\NormalTok{)}
+\NormalTok{  \}}
+  \FunctionTok{return}\NormalTok{(res)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{b-5}{%
+\subsubsection{B}\label{b-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \SpecialCharTok{{-}}\DecValTok{60}\SpecialCharTok{:}\DecValTok{60}\NormalTok{, }\AttributeTok{y =} \FunctionTok{Cross\_Cor\_fun}\NormalTok{(covid\_data, }\StringTok{"World"}\NormalTok{, }\StringTok{"new\_cases\_smoothed"}\NormalTok{, }\StringTok{"new\_deaths\_smoothed"}\NormalTok{))) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Diagnosis to death corralation (days)"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Days"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Corralation"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-35-1.pdf}
+
+\hypertarget{as-a-result-of-running-the-cross-correlation-function-manually-it-is-evident-that-around-the-immediate-time-span-the-correlation-between-the-diagnosis-of-the-disease-and-mortality-from-it-is-the-highest.-that-is-the-period-of-time-with-the-maximum-correlation-between-the-two-variables-is-immediately-when-people-are-diagnosed-with-disease-and-in-the-first-days-following-it.}{%
+\paragraph{As a result of running the cross-correlation function
+manually, it is evident that around the immediate time span the
+correlation between the diagnosis of the disease and mortality from it,
+is the highest. That is, the period of time with the maximum correlation
+between the two variables is immediately when people are diagnosed with
+disease and in the first days following
+it.}\label{as-a-result-of-running-the-cross-correlation-function-manually-it-is-evident-that-around-the-immediate-time-span-the-correlation-between-the-diagnosis-of-the-disease-and-mortality-from-it-is-the-highest.-that-is-the-period-of-time-with-the-maximum-correlation-between-the-two-variables-is-immediately-when-people-are-diagnosed-with-disease-and-in-the-first-days-following-it.}}
+
+\hypertarget{section-8}{%
+\section{9}\label{section-8}}
+
+\hypertarget{a-6}{%
+\subsubsection{A}\label{a-6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{covid\_data }\OtherTok{\textless{}{-}}\NormalTok{ covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{death\_rate =}\NormalTok{ (total\_deaths}\SpecialCharTok{/}\NormalTok{total\_cases))}
+\NormalTok{covid\_data}\SpecialCharTok{$}\NormalTok{continent[covid\_data}\SpecialCharTok{$}\NormalTok{location }\SpecialCharTok{==} \StringTok{"World"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"World"}
+\FunctionTok{ggplot}\NormalTok{(covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{\textgreater{}=} \StringTok{"2021{-}01{-}01"} \SpecialCharTok{\&}\NormalTok{ continent }\SpecialCharTok{!=} \StringTok{""}\NormalTok{) ,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{date, }\AttributeTok{y=}\NormalTok{death\_rate, }\AttributeTok{color=}\NormalTok{continent)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{span=}\FloatTok{0.01}\NormalTok{, }\AttributeTok{level=}\FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Date"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Death rate"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+\hypertarget{in-most-continents-we-can-see-a-decrease-over-the-time-line.-the-most-plausible-explanation-is-the-advent-of-the-covid-vaccines.}{%
+\paragraph{In most continents we can see a decrease over the time line.
+The most plausible explanation is the advent of the covid
+vaccines.}\label{in-most-continents-we-can-see-a-decrease-over-the-time-line.-the-most-plausible-explanation-is-the-advent-of-the-covid-vaccines.}}
+
+\hypertarget{b-6}{%
+\subsubsection{B}\label{b-6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{\textgreater{}=} \StringTok{"2021{-}01{-}01"} \SpecialCharTok{\&}\NormalTok{ continent }\SpecialCharTok{!=} \StringTok{""}\NormalTok{) ,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{ date, }\AttributeTok{y=}\NormalTok{total\_vaccinations\_per\_hundred)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ continent)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Total vaccinations per hundred"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-37-1.pdf}
+
+\hypertarget{as-we-expected-the-graphs-that-reflect-the-risk-are-negatively-correlated-with-the-graphs-that-reflect-the-amount-of-vaccines-in-the-different-continents.}{%
+\paragraph{As we expected, the graphs that reflect the risk are
+negatively correlated with the graphs that reflect the amount of
+vaccines in the different
+continents.}\label{as-we-expected-the-graphs-that-reflect-the-risk-are-negatively-correlated-with-the-graphs-that-reflect-the-amount-of-vaccines-in-the-different-continents.}}
+
+\hypertarget{section-9}{%
+\section{10}\label{section-9}}
+
+\hypertarget{a-7}{%
+\subsubsection{A}\label{a-7}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diff }\OtherTok{=} \FunctionTok{abs}\NormalTok{(current}\SpecialCharTok{$}\NormalTok{excess\_mortality\_cumulative\_per\_million}\SpecialCharTok{{-}}\NormalTok{current}\SpecialCharTok{$}\NormalTok{total\_deaths\_per\_million)}
+\FunctionTok{library}\NormalTok{(ggrepel)}
+\FunctionTok{ggplot}\NormalTok{(current , }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ total\_deaths\_per\_million, }\AttributeTok{y =}\NormalTok{ excess\_mortality\_cumulative\_per\_million)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =} \FunctionTok{ifelse}\NormalTok{(diff }\SpecialCharTok{\textless{}} \DecValTok{2000}\NormalTok{,}\StringTok{\textquotesingle{}seagreen3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{slope=}\DecValTok{1}\NormalTok{, }\AttributeTok{intercept=}\DecValTok{0}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{slope=}\DecValTok{1}\NormalTok{, }\AttributeTok{intercept=}\DecValTok{2000}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{slope=}\DecValTok{1}\NormalTok{, }\AttributeTok{intercept=}\SpecialCharTok{{-}}\DecValTok{2000}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Total death per million"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Excess mortality per million"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{name =} \StringTok{"Difference"}\NormalTok{, }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"\textgreater{} 2000"}\NormalTok{, }\StringTok{"\textless{} 2000"}\NormalTok{), }\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}seagreen3\textquotesingle{}}\NormalTok{), }\AttributeTok{na.translate =}\NormalTok{ F) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text\_repel}\NormalTok{(}\AttributeTok{data =}\NormalTok{ current, }\AttributeTok{label =} \FunctionTok{ifelse}\NormalTok{(diff }\SpecialCharTok{\textgreater{}} \DecValTok{2000}\NormalTok{, current}\SpecialCharTok{$}\NormalTok{location,}\StringTok{""}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+\hypertarget{b-7}{%
+\subsubsection{B}\label{b-7}}
+
+\hypertarget{here-we-can-see-the-top-3-location-by-the-amount-of-data-point-for-excess_mortality_cumulative_per_million-with-an-excess-mortality-at-least-2000-per-million-above-the-covid-death-rate-.}{%
+\paragraph{Here we can see the top 3 location by the amount of data
+point for excess\_mortality\_cumulative\_per\_million, with an excess
+mortality at least 2000 per million above the covid death rate
+.}\label{here-we-can-see-the-top-3-location-by-the-amount-of-data-point-for-excess_mortality_cumulative_per_million-with-an-excess-mortality-at-least-2000-per-million-above-the-covid-death-rate-.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{large\_diff }\OtherTok{=}\NormalTok{ current}\SpecialCharTok{$}\NormalTok{excess\_mortality\_cumulative\_per\_million}\SpecialCharTok{{-}}\NormalTok{current}\SpecialCharTok{$}\NormalTok{total\_deaths\_per\_million}\SpecialCharTok{\textgreater{}}\DecValTok{2000}
+\NormalTok{covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(location) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(covid\_data}\SpecialCharTok{$}\NormalTok{excess\_mortality\_cumulative\_per\_million) }\SpecialCharTok{\&}\NormalTok{ location }\SpecialCharTok{\%in\%}\NormalTok{ current[large\_diff]}\SpecialCharTok{$}\NormalTok{location) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{count}\NormalTok{(location) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(n)) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       location   n
+## 1 South Africa 112
+## 2     Bulgaria 107
+## 3       Mexico 105
+\end{verbatim}
+
+\hypertarget{lets-choose-south-africa-bulgaria-and-mexico-and-plot-their-total_deaths_per_million-and-excess_mortality_cumulative_per_million.}{%
+\paragraph{Let's choose South Africa, Bulgaria and Mexico, and plot
+their total\_deaths\_per\_million and
+excess\_mortality\_cumulative\_per\_million.}\label{lets-choose-south-africa-bulgaria-and-mexico-and-plot-their-total_deaths_per_million-and-excess_mortality_cumulative_per_million.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(covid\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(location }\SpecialCharTok{==} \FunctionTok{c}\NormalTok{(}\StringTok{"South Africa"}\NormalTok{, }\StringTok{"Bulgaria"}\NormalTok{, }\StringTok{"Mexico"}\NormalTok{))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ total\_deaths\_per\_million, }\AttributeTok{color =}\NormalTok{ location), }\AttributeTok{span =} \FloatTok{0.05}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ excess\_mortality\_cumulative\_per\_million, }\AttributeTok{color =}\NormalTok{ location), }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{span =} \FloatTok{0.3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Date"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Amount"}\NormalTok{, }\AttributeTok{color =} \StringTok{"Country"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Excessive death (dashed)}\SpecialCharTok{\textbackslash{}n}\StringTok{Covid death rate (solid)"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{scale\_linetype\_manual}\NormalTok{(}\AttributeTok{name=}\StringTok{"Test"}\NormalTok{, }\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"dashed"}\NormalTok{, }\StringTok{"solid"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_solarized}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Lab_1_Orenstein_Ido_and_Salomon_Gal_files/figure-latex/unnamed-chunk-40-1.pdf}
+
+\hypertarget{we-can-see-from-the-plot-that-for-all-three-countries-whenever-the-covid-death-rate-increased---the-excess-mortality-also-increased.-we-can-assume-that-this-happened-because-many-death-cases-were-not-tracked-as-by-covid-but-in-fact-they-were.}{%
+\paragraph{We can see from the plot that for all three countries,
+whenever the covid death rate increased - the excess mortality also
+increased. We can assume that this happened because many death cases
+were not tracked as by covid, but in fact they
+were.}\label{we-can-see-from-the-plot-that-for-all-three-countries-whenever-the-covid-death-rate-increased---the-excess-mortality-also-increased.-we-can-assume-that-this-happened-because-many-death-cases-were-not-tracked-as-by-covid-but-in-fact-they-were.}}
+
+\end{document}
